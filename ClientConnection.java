@@ -18,8 +18,9 @@ public class ClientConnection implements Runnable {
     public void run() {
 
         try {
-            incomingClientStream = new ObjectInputStream(clientSocket.getInputStream());
             serverResponseStream = new ObjectOutputStream(clientSocket.getOutputStream());
+            incomingClientStream = new ObjectInputStream(clientSocket.getInputStream());
+
             Message clientMessage = null;
             while(!clientSocket.isClosed()) { // while the connection hasn't closed yet
                 // listen for message

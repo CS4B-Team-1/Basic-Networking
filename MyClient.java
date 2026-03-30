@@ -15,29 +15,30 @@ public class MyClient implements Runnable {
     }
 
     public void run() {
-        try {
-            serverResponseStream = new ObjectInputStream(socket.getInputStream());
-            outgoingMessageStream = new ObjectOutputStream(socket.getOutputStream());
+        // try {
+        //     serverResponseStream = new ObjectInputStream(socket.getInputStream());
+        //     outgoingMessageStream = new ObjectOutputStream(socket.getOutputStream());
 
-            int responsesReceived = 0;
+        //     int responsesReceived = 0;
 
-            while(responsesReceived < 5) {
-                outgoingMessageStream.writeObject(new Message("outgoing client message #" + (responsesReceived + 1)));
-                outgoingMessageStream.flush();
+        //     while(responsesReceived < 5) {
+        //         outgoingMessageStream.writeObject(new Message("outgoing client message #" + (responsesReceived + 1)));
+        //         outgoingMessageStream.flush();
 
-                Message incomingMessage = null;
-                while (incomingMessage != null) {
-                    incomingMessage = (Message) serverResponseStream.readObject();
-                }
-                responsesReceived++;
-            }
+        //         Message incomingMessage = null;
+        //         while (incomingMessage == null) {
+        //             incomingMessage = (Message) serverResponseStream.readObject();
+        //         }
+        //         System.out.println(incomingMessage.getMessage());
+        //         responsesReceived++;
+        //     }
 
-            serverResponseStream.close();
-            outgoingMessageStream.close();
-            socket.close();
+        //     serverResponseStream.close();
+        //     outgoingMessageStream.close();
+        //     socket.close();
 
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
+        // } catch (IOException | ClassNotFoundException e) {
+        //     System.out.println(e.getMessage());
+        // }
     }
 }

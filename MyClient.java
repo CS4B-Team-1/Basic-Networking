@@ -23,19 +23,19 @@ public class MyClient implements Runnable {
             serverResponseStream = new ObjectInputStream(socket.getInputStream());
 
             int messagesSent = 0;
+            try {
+                while(true) {
+                    outgoingMessageStream.writeObject(new Message("outgoing client message #" + (messagesSent + 1) + " from " + name));
+                    outgoingMessageStream.flush();
 
-            while(messagesSent < 5) {
-                outgoingMessageStream.writeObject(new Message("outgoing client message #" + (messagesSent + 1) + " from " + name));
-                outgoingMessageStream.flush();
+                    Message incomingMessage = null;
 
-                Message incomingMessage = null;
-
-                do { 
                     incomingMessage = (Message) serverResponseStream.readObject();
                     System.out.println(name + " receiving " + incomingMessage.getMessage());
-                } while (serverResponseStream.available() != 0);
-
-                messagesSent++;
+                    messagesSent++;
+                } 
+            } catch (IOException e) {
+                System.out.println("Exception thrown while read/write of incoming/outgoing MyClient Message: " + e.getMessage());
             }
 
             serverResponseStream.close();

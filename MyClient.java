@@ -3,7 +3,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class MyClient implements Runnable {
+public class MyClient {
 
     private String name;
     private int port;

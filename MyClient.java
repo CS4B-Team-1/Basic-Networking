@@ -3,15 +3,18 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class MyClient implements Runnable {
+public class MyClient {
+
+    private String name;
     private int port;
     private Socket socket;
     private ObjectOutputStream outgoingMessageStream; // message that the client wants to send
     private ObjectInputStream serverResponseStream; // input from server
 
-    public MyClient(String host, int port) throws IOException {
+    public MyClient(String host, int port, String name) throws IOException {
         this.port = port;
         this.socket = new Socket(host, port);
+        this.name = name;
     }
 
     public void run() {
@@ -19,18 +22,20 @@ public class MyClient implements Runnable {
             outgoingMessageStream = new ObjectOutputStream(socket.getOutputStream());
             serverResponseStream = new ObjectInputStream(socket.getInputStream());
 
-            int responsesReceived = 0;
+            int messagesSent = 0;
+            try {
+                while(true) {
+                    outgoingMessageStream.writeObject(new Message("outgoing client message #" + (messagesSent + 1) + " from " + name));
+                    outgoingMessageStream.flush();
 
-            while(responsesReceived < 5) {
-                outgoingMessageStream.writeObject(new Message("outgoing client message #" + (responsesReceived + 1)));
-                outgoingMessageStream.flush();
+                    Message incomingMessage = null;
 
-                Message incomingMessage = null;
-                while (incomingMessage == null) {
                     incomingMessage = (Message) serverResponseStream.readObject();
-                }
-                System.out.println(incomingMessage.getMessage());
-                responsesReceived++;
+                    System.out.println(name + " receiving " + incomingMessage.getMessage());
+                    messagesSent++;
+                } 
+            } catch (IOException e) {
+                System.out.println("Exception thrown while read/write of incoming/outgoing MyClient Message: " + e.getMessage());
             }
 
             serverResponseStream.close();

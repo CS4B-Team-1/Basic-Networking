@@ -1,8 +1,11 @@
+package Server.Router;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import Server.Message;
 
 public class Router implements Runnable{
 

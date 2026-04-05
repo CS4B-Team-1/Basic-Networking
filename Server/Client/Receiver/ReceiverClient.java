@@ -1,9 +1,12 @@
+package Server.Client.Receiver;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class MyClient {
+import Server.Message;
+
+public class ReceiverClient {
 
     private String name;
     private int port;
@@ -11,7 +14,7 @@ public class MyClient {
     private ObjectOutputStream outgoingMessageStream; // message that the client wants to send
     private ObjectInputStream serverResponseStream; // input from server
 
-    public MyClient(String host, int port, String name) throws IOException {
+    public ReceiverClient(String host, int port, String name) throws IOException {
         this.port = port;
         this.socket = new Socket(host, port);
         this.name = name;

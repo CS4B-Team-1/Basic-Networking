@@ -11,42 +11,25 @@ public class ReceiverClient {
     private String name;
     private int port;
     private Socket socket;
-    private ObjectOutputStream outgoingMessageStream; // message that the client wants to send
     private ObjectInputStream serverResponseStream; // input from server
 
-    public ReceiverClient(String host, int port, String name) throws IOException {
+    public ReceiverClient(String host, int port) {
         this.port = port;
-        this.socket = new Socket(host, port);
-        this.name = name;
+
+        try {
+            this.socket = new Socket(host, port);
+        } catch (IOException e) {
+            System.out.println("ReceiverClient error connecting to " + host + " on port " + port + " " + e.getMessage());
+        }
+
+        try {
+            this.serverResponseStream = new ObjectInputStream(this.socket.getInputStream());
+        } catch (IOException e) {
+            System.out.println("ReceiverClient error accessing InputStream : " + e.getMessage());
+        }
     }
 
-    public void run() {
-        try {
-            outgoingMessageStream = new ObjectOutputStream(socket.getOutputStream());
-            serverResponseStream = new ObjectInputStream(socket.getInputStream());
-
-            int messagesSent = 0;
-            try {
-                while(true) {
-                    outgoingMessageStream.writeObject(new Message("outgoing client message #" + (messagesSent + 1) + " from " + name));
-                    outgoingMessageStream.flush();
-
-                    Message incomingMessage = null;
-
-                    incomingMessage = (Message) serverResponseStream.readObject();
-                    System.out.println(name + " receiving " + incomingMessage.getMessage());
-                    messagesSent++;
-                } 
-            } catch (IOException e) {
-                System.out.println("Exception thrown while read/write of incoming/outgoing MyClient Message: " + e.getMessage());
-            }
-
-            serverResponseStream.close();
-            outgoingMessageStream.close();
-            socket.close();
-
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
+    public Message receive() throws IOException, ClassNotFoundException {
+        return (Message) this.serverResponseStream.readObject();
     }
 }

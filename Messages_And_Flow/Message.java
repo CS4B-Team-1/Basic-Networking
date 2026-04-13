@@ -5,6 +5,7 @@ public abstract class Message {
     private String senderId;
     private String channel;
     private String timestamp;
+    private String messageType = null;
 
     protected Message (String messageId, String senderId, String channel, String timestamp) {
         this.messageId = messageId;

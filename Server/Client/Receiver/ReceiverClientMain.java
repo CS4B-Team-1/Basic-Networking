@@ -2,7 +2,7 @@ package Server.Client.Receiver;
 
 import java.io.IOException;
 
-import Server.Message;
+import Server.Message.Message;
 
 public class ReceiverClientMain {
     public static void main(String[] args) {

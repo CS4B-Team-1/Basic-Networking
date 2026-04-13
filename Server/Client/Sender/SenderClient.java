@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import Server.Message;
+import Server.Message.Message;
 
 public class SenderClient{
     private int port;

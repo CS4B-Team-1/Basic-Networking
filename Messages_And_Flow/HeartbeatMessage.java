@@ -8,7 +8,7 @@ public class HeartbeatMessage extends Message {
         this.payload = payload;
     }
 
-    public String getErrorDetails() {
+    public String getHeartbeat() {
         return this.payload;
     }
 }

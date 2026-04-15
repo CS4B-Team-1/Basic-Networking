@@ -5,7 +5,7 @@ public class ErrorMessage extends Message {
 
     public ErrorMessage(String messageId, String senderId, String channel, ErrorPayload payload, ) {
         super(messageId, senderId, channel, timestamp, "ERROR");
-        this.errorDetails = errorDetails;
+        this.payload = payload;
     }
 
     public ErrorPayload getErrorDetails() {

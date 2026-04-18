@@ -1,4 +1,5 @@
-package Messages_And_Flow;
+package Messages_And_Flow.Error;
+import Messages_And_Flow.Message;
 
 public class HeartbeatMessage extends Message {
     private HeartbeatPayload payload;
@@ -8,7 +9,7 @@ public class HeartbeatMessage extends Message {
         this.payload = payload;
     }
 
-    public String getHeartbeat() {
+    public HeartbeatPayload getPayload() {
         return this.payload;
     }
 }

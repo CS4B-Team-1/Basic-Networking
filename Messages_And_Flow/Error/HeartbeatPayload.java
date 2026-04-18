@@ -1,4 +1,4 @@
-package Messages_And_Flow;
+package Messages_And_Flow.Error;
 
 public class HeartbeatPayload {
     private String timestamp;

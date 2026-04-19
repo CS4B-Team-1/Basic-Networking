@@ -1,31 +1,19 @@
-package Messages_And_Flow.Game_End_Messages;
+package Messages_And_Flow.GameEndMessages;
 
-public class GameWonPayload {
+public class UnsubscribePayload {
     private String gameId;
-    private String winner;
-    private String winningLine;
-    private String finalBoard;
+    private String channel;
 
-    public GameWonPayload(String gameId, String winner, String winningLine, String finalBoard) {
+    public UnsubscribePayload(String gameId, String channel) {
         this.gameId = gameId;
-        this.winner = winner;
-        this.winningLine = winningLine;
-        this.finalBoard = finalBoard;
+        this.channel = channel;
     }
 
     public String getGameId() {
         return gameId;
     }
 
-    public String getWinner() {
-        return winner;
-    }
-
-    public String getWinningLine() {
-        return winningLine;
-    }
-
-    public String getFinalBoard() {
-        return finalBoard;
+    public String getChannel() {
+        return channel;
     }
 }

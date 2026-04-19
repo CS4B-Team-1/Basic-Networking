@@ -1,37 +1,15 @@
-package Messages_And_Flow;
+package Messages_And_Flow.GameEndMessages;
+import Messages_And_Flow.Message;
 
-public abstract class Message {
-    private String messageId;
-    private String senderId;
-    private String channel;
-    private String timestamp;
-    private String messageType;
+public class GameWonMessage extends Message {
+    private GameWonPayload payload;
 
-    protected Message (String messageId, String senderId, String channel, String timestamp, String messageType) {
-        this.messageId = messageId;
-        this.senderId = senderId;
-        this.channel = channel;
-        this.timestamp = timestamp;
-        this.messageType = messageType;
+    public GameWonMessage(String messageId, String senderId, String channel, String timestamp, GameWonPayload payload) {
+        super(messageId, senderId, channel, timestamp, "GAMEWON");
+        this.payload = payload;
     }
 
-    public String getMessageId(){
-        return this.messageId;
-    }
-
-    public String getSenderId() {
-        return this.senderId;
-    }
-
-    public String getChannel() {
-        return this.channel;
-    }
-
-    public String getTimeStamp() {
-        return this.timestamp;
-    }
-
-    public String getMessageType() {
-        return this.messageType;
+    public GameWonPayload getPayload() {
+        return payload;
     }
 }

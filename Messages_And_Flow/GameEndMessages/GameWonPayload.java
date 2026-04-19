@@ -1,4 +1,4 @@
-package Messages_And_Flow.Game_End_Messages;
+package Messages_And_Flow.GameEndMessages;
 
 public class GameWonPayload {
     private String gameId;

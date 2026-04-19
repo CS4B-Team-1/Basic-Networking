@@ -1,15 +1,13 @@
-package Messages_And_Flow.Game_End_Messages;
+package Messages_And_Flow.GameEndMessages;
 
-public class GameWonPayload {
+public class GameOverPayload {
     private String gameId;
-    private String winner;
-    private String winningLine;
+    private String result;
     private String finalBoard;
 
-    public GameWonPayload(String gameId, String winner, String winningLine, String finalBoard) {
+    public GameOverPayload(String gameId, String result, String finalBoard) {
         this.gameId = gameId;
-        this.winner = winner;
-        this.winningLine = winningLine;
+        this.result = result;
         this.finalBoard = finalBoard;
     }
 
@@ -17,12 +15,8 @@ public class GameWonPayload {
         return gameId;
     }
 
-    public String getWinner() {
-        return winner;
-    }
-
-    public String getWinningLine() {
-        return winningLine;
+    public String getResult() {
+        return result;
     }
 
     public String getFinalBoard() {

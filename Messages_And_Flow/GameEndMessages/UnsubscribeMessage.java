@@ -1,4 +1,4 @@
-package Messages_And_Flow.Game_End_Messages;
+package Messages_And_Flow.GameEndMessages;
 import Messages_And_Flow.Message;
 
 public class UnsubscribeMessage extends Message {
